@@ -4,21 +4,13 @@ const chakram = require('chakram');
 const expect = chakram.expect;
 const api = require('./utils/api');
 const data = require('../server/data.json');
+const input = require('../specs/input-datas.json');
 const postLength = 100;
 
 describe('Posts', () => {
     let addedPostId;
-    const createdPost = {
-        title: 'created title',
-        body: 'created body',
-        userId: 1
-    };
-    const givenIdPost = {
-        title: 'title',
-        body: 'body',
-        userId: 1,
-        id: 102
-    }
+    const createdPost = input[0];
+    const givenIdPost = input[1];
     describe('Created', () => {
         it('should add a new post', () => {
             return chakram.post(api.url('posts'), {
@@ -107,11 +99,7 @@ describe('Posts', () => {
     });
 
     describe('Updated', () => {
-        const changedPost = {
-            title: 'changed title',
-            body: 'changed body',
-            userId: 111
-        };
+        const changedPost = input[2];
         it('should update existing post with given data', () => {
             const response = chakram.put(api.url('posts/75'), {
                 title: changedPost.title,
